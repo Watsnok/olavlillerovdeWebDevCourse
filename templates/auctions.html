@@ -1,0 +1,9 @@
+{% extends "home.html" %}
+
+{% block content %}
+    {%  for auction in auctions %}
+            Title: {{ auction.title }} Sold by: {{auction.seller}} Created: {{ auction.created_at}} minimum price: {{ auction.minprice }} <br>
+            Description: {{ auction.description }}
+            <br><br>
+    {% endfor %}
+{% endblock %}
