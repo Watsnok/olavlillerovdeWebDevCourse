@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from yaasApplication.views import home
+from yaasApplication.views import home, register, change_password, change_email
 from django.conf.urls import url
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
 
 
 urlpatterns = [
     url(r'^$', home, name="index"),
     url(r'admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    url(r'register/', register, name="register"),
+    url(r'^password/$', change_password, name='change_password'),
+    url(r'^email/$', change_email, name='change_email'),
+
 ]
