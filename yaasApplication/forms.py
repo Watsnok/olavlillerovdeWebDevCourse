@@ -22,20 +22,13 @@ class UserCreationForm(UserCreationForm):
 class changeEmailForm(forms.Form):
     new_email = forms.EmailField(label="Email", required=True)
 
-    #Write CleanData method?
+class auctionForm(forms.Form):
+    class Meta:
+        model = User
+        fields = ("title", "description", "minprice", "deadline")
 
-    #class Meta:
-      #  model = User
-    #   fields = "New email"
+    title = forms.CharField(max_length=30)
+    description = forms.CharField(max_length=300, widget=forms.Textarea)
+    minprice = forms.IntegerField()
+    deadline = forms.DateTimeField()
 
-   # def __init__(self, user, *args, **kwargs):
-   #     self.user = user
-   #     super().__init__(*args, **kwargs)
-
-
-  #  def save_all_files(self, commit=True):
-   #     email =
-   #     self.user.set_email(email)
-   #     if commit:
-    #        self.user.save_all_files()
-    #    return self.user

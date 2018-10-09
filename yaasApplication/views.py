@@ -3,13 +3,15 @@ from django.http import HttpResponse
 from .models import auction
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from yaasApplication.forms import UserCreationForm, changeEmailForm
+from yaasApplication.forms import UserCreationForm, changeEmailForm, auctionForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
-
+from django.utils import timezone
+from django import forms
+from datetime import date, datetime
 
 
 
@@ -59,6 +61,27 @@ def change_email(request):
         form = changeEmailForm(request.POST, request.user)
 
     return render(request, 'change_email.html', {'form' : form})
+
+@login_required
+def create_auction(request):
+    user = request.user
+    newAuction = auction()
+    if request.method == 'POST':
+        form = auctionForm(request.POST, request.user)
+        if form.is_valid():
+            newAuction.title = form.cleaned_data['title']
+            newAuction.seller = user
+            newAuction.description = form.cleaned_data['description']
+            newAuction.minprice = form.cleaned_data['minprice']
+            newAuction.deadline = form.cleaned_data['deadline']
+            if newAuction.checkDeadline(created=datetime.now(), deadline=form.cleaned_data['deadline']):
+                newAuction.save()
+            return redirect('index')
+
+    else:
+        form = auctionForm(request.POST, request.user)
+
+    return render(request, 'createAuction.html', {'form' : form})
 
 
 

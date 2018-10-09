@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from yaasApplication.views import home, register, change_password, change_email
+from yaasApplication.views import home, register, change_password, change_email, create_auction
 from django.conf.urls import url
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'register/', register, name="register"),
     url(r'^password/$', change_password, name='change_password'),
     url(r'^email/$', change_email, name='change_email'),
+    url(r'^create_auction', create_auction, name='create_auction'),
 
 ]

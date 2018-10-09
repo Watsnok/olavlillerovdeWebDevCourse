@@ -1,0 +1,19 @@
+{% extends "home.html" %}
+{% block content %}
+    <form action="create_auction" method="post">
+         {% csrf_token %}
+        <table>  {{ form.as_table }} </table><br>
+        Deadline needs to be format yyyy-mm-dd <br>
+        <input  type="button" value="Create Auction" onclick="confirmAuction(this.form)">
+    </form>
+    <script>
+        function confirmAuction(form){
+            if(confirm("Confirm auction?")){
+                form.submit();
+            }
+            else{
+                alert("Auction will not be saved")
+            }
+        }
+    </script>
+{% endblock %}
