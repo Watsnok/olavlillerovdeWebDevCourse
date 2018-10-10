@@ -13,6 +13,7 @@ class auction(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     minprice = models.IntegerField()
     deadline = models.DateTimeField()
+    is_active = True
 
     def __str__(self):
         return self.title
@@ -26,3 +27,4 @@ class auction(models.Model):
             raise forms.ValidationError("Duration must be longer than 72 hours")
         else:
             return True
+

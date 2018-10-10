@@ -4,7 +4,7 @@
     {% block content %}
         <form method="POST">
             {% csrf_token %}
-            {{ form }}
+            {{ form}}
             <button type="submit"> Save Changes </button>
         </form>
     {% endblock %}

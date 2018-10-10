@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import auction
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from yaasApplication.forms import UserCreationForm, changeEmailForm, auctionForm
+from yaasApplication.forms import UserCreationForm, changeEmailForm, auctionForm, editDescriptionForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
@@ -22,7 +22,7 @@ from django.conf import settings
 
 def home(request):
     auctions = auction.objects.all()
-    return render(request, "auctions.html", {"auctions": auctions} )
+    return render(request, "auctions.html", {"auctions": auctions})
 
 def register(request):
         if request.method == 'POST':
@@ -66,6 +66,22 @@ def change_email(request):
     return render(request, 'change_email.html', {'form' : form})
 
 @login_required
+def edit_auction(request, id):
+    currauction = auction.objects.get(pk=id)
+    if request.method == 'POST':
+        form = editDescriptionForm(request.POST, request.user)
+        if form.is_valid():
+
+            currauction.description = form.cleaned_data['description']
+            currauction.save()
+            return redirect('index')
+    else:
+        form = editDescriptionForm(request.POST, request.user)
+
+    return render(request, 'edit_auction.html', {'form' : form})
+
+
+@login_required
 def create_auction(request):
     user = request.user
     newAuction = auction()
@@ -90,10 +106,12 @@ def create_auction(request):
 
     return render(request, 'createAuction.html', {'form' : form})
 
-
-
-
-
-
-
-
+@login_required
+def my_auctions(request):
+    user = request.user
+    all_auctions = auction.objects.all()
+    auctions = []
+    for item in all_auctions:
+        if user == item.seller:
+            auctions.append(item)
+    return render(request, 'my_auctions.html', {'auctions': auctions})

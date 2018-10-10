@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from yaasApplication.models import auction
 
 
 class UserCreationForm(UserCreationForm):
@@ -18,6 +19,9 @@ class UserCreationForm(UserCreationForm):
             user.save()
         return user
 
+    def getName(self):
+        return self.username
+
 
 class changeEmailForm(forms.Form):
     new_email = forms.EmailField(label="Email", required=True)
@@ -32,3 +36,10 @@ class auctionForm(forms.Form):
     minprice = forms.IntegerField()
     deadline = forms.DateTimeField()
 
+
+class editDescriptionForm(forms.Form):
+    description = forms.CharField(max_length=300, widget=forms.Textarea)
+
+    class Meta:
+        model = auction
+        fields = ('description')

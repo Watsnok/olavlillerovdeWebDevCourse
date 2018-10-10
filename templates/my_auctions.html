@@ -1,0 +1,12 @@
+{% extends "home.html" %}
+{% block content %}
+    These are your auctions:
+    {% for auction in auctions %}
+        <br>
+        Title: {{ auction.title }} Sold by: {{auction.seller}} Created: {{ auction.created_at}} minimum price: {{ auction.minprice }} <br>
+            Description: {{ auction.description }} Deadline {{ auction.deadline }}
+        <br> <a href={% url "edit_auction" auction.id %}> Edit Auction</a>
+        <br>
+    {% endfor %}
+
+{% endblock %}
