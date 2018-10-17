@@ -6,7 +6,6 @@
     </head>
     <body>
         <h1>YAAS</h1>
-
         <a href={% url 'index' %}>Home</a>
         {% if user.is_authenticated %}
             User: {{ user.get_username }}
@@ -15,13 +14,33 @@
             <a href={% url 'change_email' %}> Change Email</a>
             <a href={% url 'create_auction' %}> Create Auction</a>
             <a href={% url 'my_auctions' %}>My Auctions </a>
+              {% if user.is_superuser %}
+                  <br>
+                <a href={% url 'banned_auctions' %}>Banned auctions</a>
+            {% endif %}
 
         {% else %}
             <a href={% url 'register' %}>Register</a>
             <a href={% url 'login' %}>Login</a>
             No active user.
         {% endif %}
+        <br>
+        <form action={% url 'search_auction' %} method="GET">
+            <input type="text" name="search_auction" placeholder="Title of Auction" value="{{ request.GET.search_auction }}">
+            <input type="submit" value="Search" >
+        </form>
+
+
         <br><br>
+
+        {% if messages %}
+             <ul class="messages">
+                 {% for message in messages %}
+                     <li class="{{ message.tags }}">{{ message }}</li>
+                 {% endfor %}
+             </ul>
+        {% endif %}
         {% block content %}{% endblock %}
     </body>
 </html>
+

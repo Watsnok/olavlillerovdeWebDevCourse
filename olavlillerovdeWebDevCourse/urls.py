@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from yaasApplication.views import home, register, change_password, change_email, create_auction, edit_auction, my_auctions
+from yaasApplication.views import home, register, change_password, change_email, create_auction, edit_auction, my_auctions, \
+    search_auction, place_bid, banAuction, banned_auctions
 from django.conf.urls import url
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
@@ -31,5 +32,9 @@ urlpatterns = [
     url(r'^create_auction', create_auction, name='create_auction'),
     url(r'^edit_auction/(?P<id>.*)', edit_auction, name='edit_auction'),
     url(r'^my_auctions', my_auctions, name="my_auctions"),
+    url(r'^search_auction=$', search_auction, name="search_auction"),
+    url(r'^place_bid/(?P<id>.*)', place_bid, name="place_bid"),
+    url(r'^ban_auction/(?P<id>.*)', banAuction, name='ban_auction'),
+    url(r'^banned auctions', banned_auctions, name='banned_auctions'),
 
 ]

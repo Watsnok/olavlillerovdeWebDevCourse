@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+{% block content %}
+            Title: {{ auction.title }}<br>
+            Sold by: {{auction.seller}} <br>
+            Created: {{ auction.created_at}} <br>
+            minimum price: {{ auction.minprice }} <br>
+            Deadline {{ auction.deadline }}<br>
+            Description: {{ auction.description }}<br>
+            <br><br> Current bid: {{ auction.currentBid }} <br>
+
+
+    {% if user == auction.seller %}
+        You are the seller of this auction.<br>
+        Bidding is not allowed
+     {% elif user == auction.winner %}
+        You are the current winner of this auction
+     {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form}}
+            <button type="submit"> Place Bid </button>
+        </form>
+
+    {% endif %}
+{% endblock %}

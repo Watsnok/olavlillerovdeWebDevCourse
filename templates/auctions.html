@@ -3,7 +3,18 @@
 {% block content %}
     {%  for auction in auctions %}
             Title: {{ auction.title }} Sold by: {{auction.seller}} Created: {{ auction.created_at}} minimum price: {{ auction.minprice }} <br>
-            Description: {{ auction.description }} Deadline {{ auction.deadline }}
+            Description: {{ auction.description }} Deadline {{ auction.deadline }} <br>
+            Current bid: {{ auction.currentBid }}
+            {% if user.is_authenticated %}
+                {% if user != auction.seller and auction.is_active %}
+                    <a href={% url "place_bid" auction.id %}>New Bid</a>
+                    {% endif %}
+            {% endif %}
+
+            {% if user.is_superuser and not auction.isBanned %}
+                <br>
+                <a href={% url 'ban_auction' auction.id %}>Ban this auction</a>
+            {% endif %}
 
             <br>
             <br><br>

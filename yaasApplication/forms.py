@@ -37,6 +37,10 @@ class auctionForm(forms.Form):
     deadline = forms.DateTimeField()
 
 
+class bidForm(forms.Form):
+    bid = forms.DecimalField()
+
+
 class editDescriptionForm(forms.Form):
     description = forms.CharField(max_length=300, widget=forms.Textarea)
 
