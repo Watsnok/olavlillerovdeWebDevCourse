@@ -8,7 +8,6 @@ from django.conf import settings
 from django.db.models import Q
 
 
-
 # Create your models here.
 
 class auction(models.Model):
@@ -39,12 +38,11 @@ class auction(models.Model):
         diff = deadline - duration
         if (diff.year < created.year) or (diff.year == created.year and diff.month == created.month
                                           and diff.day <= created.day) or (diff.year == created.year
-                                                                             and diff.month < created.month):
-            #raise forms.ValidationError("Duration must be longer than 72 hours")
+                                                                           and diff.month < created.month):
+            # raise forms.ValidationError("Duration must be longer than 72 hours")
             return False
         else:
             return True
-
 
     def banAuction(self):
         # Notify all bidders
@@ -70,7 +68,8 @@ class auction(models.Model):
         return temp
 
     def notifyBidders(self, reason):
-        if reason=="ban":
+        # If ban notifies all bidders
+        if reason == "ban":
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email]
             for p in self.bidders:
@@ -84,12 +83,19 @@ class auction(models.Model):
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email]
             for p in self.bidders:
-                to_email.append(p)
+                if p != self.winner:
+                    to_email.append(p)
 
             send_mail(subject="Auction resolved",
                       message="The auction %s has been resolved" % self.getTitle(),
                       from_email=from_email, recipient_list=to_email, fail_silently=False, )
 
+    def resolveAuction(self):
+        self.is_active = False
+        self.notifySeller("resolved")
+        if self.winner is not None and self.bidders is not None:
+            self.notifyWinner("resolved")
+            self.notifyBidders("resolved")
 
     def notifySeller(self, reason):
         if reason == "newbid":
@@ -106,10 +112,24 @@ class auction(models.Model):
                       message="The admin has banned your auction: %s" % self.getTitle(),
                       from_email=from_email, recipient_list=to_email, fail_silently=False, )
 
+        elif reason == "resolved":
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [from_email, self.seller.email]
+            send_mail(subject="Auction resolved",
+                      message="The following auction has been resolved: %s" % self.getTitle(),
+                      from_email=from_email, recipient_list=to_email, fail_silently=False, )
+
     def notifyWinner(self, reason):
         if reason == "newbid":
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, self.winner.email]
             send_mail(subject="Bid received on auction", message="Your bid was successfully placed on auction: %s"
-                                           % self.getTitle(),
+                                                                 % self.getTitle(),
+                      from_email=from_email, recipient_list=to_email, fail_silently=False, )
+
+        elif reason == "resolved":
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [from_email, self.winner.email]
+            send_mail(subject="Auction resolved", message="Congratulations you have won the auction: %s"
+                                                          % self.getTitle(),
                       from_email=from_email, recipient_list=to_email, fail_silently=False, )

@@ -12,6 +12,9 @@
     {% if user == auction.seller %}
         You are the seller of this auction.<br>
         Bidding is not allowed
+    {% elif not auction.is_active%}
+        The auction is no longer active
+
      {% elif user == auction.winner %}
         You are the current winner of this auction
      {% else %}

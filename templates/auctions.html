@@ -2,6 +2,8 @@
 
 {% block content %}
     {%  for auction in auctions %}
+
+        {% if auction.is_active %}
             Title: {{ auction.title }} Sold by: {{auction.seller}} Created: {{ auction.created_at}} minimum price: {{ auction.minprice }} <br>
             Description: {{ auction.description }} Deadline {{ auction.deadline }} <br>
             Current bid: {{ auction.currentBid }}
@@ -11,7 +13,8 @@
                     {% endif %}
             {% endif %}
 
-            {% if user.is_superuser and not auction.isBanned %}
+         {% endif %}
+            {% if user.is_superuser and not auction.isBanned and auction.is_active %}
                 <br>
                 <a href={% url 'ban_auction' auction.id %}>Ban this auction</a>
             {% endif %}

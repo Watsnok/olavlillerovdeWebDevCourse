@@ -17,28 +17,30 @@ from django.conf import settings
 from django.db.models import Q
 
 
-
-
-
 # Create your views he
 
 def home(request):
     auctions = auction.objects.all()
     auctions = auctions.filter(isBanned=False)
+    auctions = auctions.filter(is_active=True)
     return render(request, "auctions.html", {"auctions": auctions})
+
 
 @login_required
 def banAuction(request, id):
     currauction = auction.objects.get(pk=id)
     user = request.user
+
     if user.is_superuser:
         if request.method == 'GET':
             currauction.banAuction()
+            currauction.is_active = False
             currauction.save()
     else:
         messages.error(request, "You have to be superuser in order to ban an auction")
 
     return render(request, 'ban_auction.html')
+
 
 @login_required
 def banned_auctions(request):
@@ -52,20 +54,22 @@ def banned_auctions(request):
 
     return redirect('index')
 
-def register(request):
-        if request.method == 'POST':
-            fm = UserCreationForm(request.POST)
-            if fm.is_valid():
-                fm.save()
-                messages.success(request, 'Account created successfully')
-        else:
-            fm = UserCreationForm()
 
-        return render(request, 'register.html', {'form': fm})
+def register(request):
+    if request.method == 'POST':
+        fm = UserCreationForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            messages.success(request, 'Account created successfully')
+    else:
+        fm = UserCreationForm()
+
+    return render(request, 'register.html', {'form': fm})
+
 
 @login_required
 def change_password(request):
-    if(request.method=='POST'):
+    if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
@@ -73,16 +77,17 @@ def change_password(request):
             messages.success(request, 'Your password was successfully updated')
             return redirect('index')
         else:
-                messages.error(request, 'Please correct the error')
+            messages.error(request, 'Please correct the error')
 
     else:
-            form = PasswordChangeForm(request.user, request.POST)
+        form = PasswordChangeForm(request.user, request.POST)
     return render(request, 'change_password.html', {'form': form})
+
 
 @login_required
 def change_email(request):
     user = request.user
-    if(request.method=='POST'):
+    if request.method == 'POST':
         form = changeEmailForm(request.POST, request.user)
         if form.is_valid():
             user.email = form.cleaned_data['new_email']
@@ -92,7 +97,8 @@ def change_email(request):
     else:
         form = changeEmailForm(request.POST, request.user)
 
-    return render(request, 'change_email.html', {'form' : form})
+    return render(request, 'change_email.html', {'form': form})
+
 
 @login_required
 def edit_auction(request, id):
@@ -111,7 +117,8 @@ def edit_auction(request, id):
     else:
         form = editDescriptionForm(request.POST, request.user)
 
-    return render(request, 'edit_auction.html', {'form' : form})
+    return render(request, 'edit_auction.html', {'form': form})
+
 
 @login_required
 def place_bid(request, id):
@@ -127,7 +134,8 @@ def place_bid(request, id):
             temp = round(temp, 2)
             increase = (float(temp) - float(currauction.currentBid))
             # Check if Bid is higher than current bid, minprice and above minimum increment
-            if currauction.currentBid <= temp and currauction.minprice < temp and increase >= 0.01:
+            if currauction.currentBid <= temp and currauction.minprice < temp and increase >= 0.01\
+                    and not currauction.isBanned and currauction.is_active:
                 currauction.currentBid = temp
                 currauction.setWinner(user)
                 currauction.addBidder(user)
@@ -142,7 +150,6 @@ def place_bid(request, id):
         form = bidForm(request.POST, request.user)
 
     return render(request, 'place_bid.html', {'form': form, 'auction': currauction})
-
 
 
 @login_required
@@ -162,7 +169,7 @@ def create_auction(request):
                 from_email = settings.EMAIL_HOST_USER
                 to_email = [from_email, user.email]
                 send_mail(subject="New Auction posted", message="Your auction was succesfully posted",
-                          from_email=from_email, recipient_list=to_email, fail_silently=False,)
+                          from_email=from_email, recipient_list=to_email, fail_silently=False, )
                 messages.success(request, "Auction was created")
                 return redirect('index')
             else:
@@ -172,7 +179,8 @@ def create_auction(request):
     else:
         form = auctionForm(request.POST, request.user)
 
-    return render(request, 'createAuction.html', {'form' : form})
+    return render(request, 'createAuction.html', {'form': form})
+
 
 @login_required
 def my_auctions(request):

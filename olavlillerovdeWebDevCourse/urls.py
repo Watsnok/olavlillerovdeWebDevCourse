@@ -18,6 +18,7 @@ from django.urls import path, include
 from yaasApplication.views import home, register, change_password, change_email, create_auction, edit_auction, my_auctions, \
     search_auction, place_bid, banAuction, banned_auctions
 from django.conf.urls import url
+
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 
