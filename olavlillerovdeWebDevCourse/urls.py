@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from yaasApplication.views import home, register, change_password, change_email, create_auction, edit_auction, my_auctions, \
-    search_auction, place_bid, banAuction, banned_auctions
+    search_auction, place_bid, banAuction, banned_auctions, loginuser, lougoutuser
 from django.conf.urls import url
 
 from django.contrib.auth.forms import UserCreationForm
@@ -26,7 +26,9 @@ from django.views.generic.edit import CreateView
 urlpatterns = [
     url(r'^$', home, name="index"),
     url(r'admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    url(r'^login', loginuser, name="login"),
+    url(r'^logout', lougoutuser, name="logout"),
+    #path('accounts/', include('django.contrib.auth.urls')),
     url(r'register/', register, name="register"),
     url(r'^password/$', change_password, name='change_password'),
     url(r'^email/$', change_email, name='change_email'),
@@ -37,5 +39,5 @@ urlpatterns = [
     url(r'^place_bid/(?P<id>.*)', place_bid, name="place_bid"),
     url(r'^ban_auction/(?P<id>.*)', banAuction, name='ban_auction'),
     url(r'^banned auctions', banned_auctions, name='banned_auctions'),
-
+    path('i18n/', include('django.conf.urls.i18n')),
 ]

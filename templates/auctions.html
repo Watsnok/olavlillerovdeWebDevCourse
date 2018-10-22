@@ -5,11 +5,13 @@
 
         {% if auction.is_active %}
             Title: {{ auction.title }} Sold by: {{auction.seller}} Created: {{ auction.created_at}} minimum price: {{ auction.minprice }} <br>
-            Description: {{ auction.description }} Deadline {{ auction.deadline }} <br>
+            Description: {{ auction.description }}<br> Deadline {{ auction.deadline }} <br>
             Current bid: {{ auction.currentBid }}
             {% if user.is_authenticated %}
-                {% if user != auction.seller and auction.is_active %}
+                {% if user != auction.seller and auction.is_active %}<br>
                     <a href={% url "place_bid" auction.id %}>New Bid</a>
+                 {% elif user == auction.seller %}
+                    <a href={% url 'edit_auction' auction.id %}> Edit </a>
                     {% endif %}
             {% endif %}
 

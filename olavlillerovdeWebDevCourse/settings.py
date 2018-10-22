@@ -13,6 +13,8 @@ from __future__ import absolute_import, unicode_literals
 
 import os
 import django_celery_beat
+from django.utils.translation import gettext_lazy as _
+
 
 
 
@@ -53,6 +55,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'user_language_middleware.UserLanguageMiddleware',
+
 ]
 
 ROOT_URLCONF = 'olavlillerovdeWebDevCourse.urls'
@@ -107,6 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+LANGUAGES = [
+    ('de', _('German')),
+    ('en', _('English')),
+    ('sv', _('Swedish')),
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -130,7 +142,8 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+EMAIL_FILE_PATH = '/tmp/app-messages'
 
 BROKER_URL = 'django://'
 broker_url = 'amqp://myuser:mypassword@localhost:5672/myvhost'
+

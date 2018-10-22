@@ -6,14 +6,36 @@
     </head>
     <body>
         <h1>YAAS</h1>
+
+
+        {% load i18n %}
+        Language/Sprache/Språk:
+
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Go">
+        </form>
+
+        {% get_current_language as lan %}
+
         <a href={% url 'index' %}>Home</a>
         {% if user.is_authenticated %}
             User: {{ user.get_username }}
-            <a href={%  url 'logout' %}> Logout </a>
-            <a href={% url 'change_password' %}> Change Password </a>
-            <a href={% url 'change_email' %}> Change Email</a>
-            <a href={% url 'create_auction' %}> Create Auction</a>
-            <a href={% url 'my_auctions' %}>My Auctions </a>
+            <a href={%  url 'logout' %}> {% if lan == "de" %} Ausloggen {% elif lan == "sv" %} Logga ut {% elif lan == "en" %} Log out {% endif %}</a>
+            <a href={% url 'change_password' %}> {% if lan == "de" %} passwortänderung {% elif lan == "sv" %} Byta lösenord {% elif lan == "en" %} Change password{% endif %} </a>
+            <a href={% url 'change_email' %}> {% if lan == "de" %} Emailänderung {% elif lan == "sv" %} Ändra e-post {% elif lan == "en" %} Change email {% endif %}</a>
+            <a href={% url 'create_auction' %}>{% if lan == "de" %} Ausloggen {% elif lan == "sv" %} Ny auktion {% elif lan == "en" %} Create auction {% endif %}</a>
+            <a href={% url 'my_auctions' %}>{% if lan == "de" %} Auktion erstellen {% elif lan == "sv" %} Mina auktioner {% elif lan == "en" %} My auctions {% endif %} </a>
               {% if user.is_superuser %}
                   <br>
                 <a href={% url 'banned_auctions' %}>Banned auctions</a>
@@ -43,4 +65,5 @@
         {% block content %}{% endblock %}
     </body>
 </html>
+
 

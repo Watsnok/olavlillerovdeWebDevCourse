@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import auction
+from .models import auction, userInfo
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from yaasApplication.forms import UserCreationForm, changeEmailForm, auctionForm, editDescriptionForm, bidForm
@@ -8,13 +8,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.utils import timezone
 from django import forms
 from datetime import date, datetime
 from django.core.mail import send_mail
 from django.conf import settings
 from django.db.models import Q
+from django.template import RequestContext
+from django.views import i18n
+from django.urls import reverse
+from django.utils import translation
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
+
+
+
 
 
 # Create your views he
@@ -25,6 +34,36 @@ def home(request):
     auctions = auctions.filter(is_active=True)
     return render(request, "auctions.html", {"auctions": auctions})
 
+def loginuser(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            if userInfo.exists(user):
+                lang = userInfo.getLang(user)
+                request.session[translation.LANGUAGE_SESSION_KEY] = lang
+
+            messages.success(request, "Login successful")
+            user.save()
+
+        else:
+            messages.error(request, "Wrong username or password")
+            return redirect('login')
+            #return HttpResponseRedirect(request.GET.get("next", reverse("login")))
+
+
+
+    else:
+        return render(request, "login.html", {"next": request.GET.get("next", reverse("index"))})
+
+    return redirect('index')
+
+
+def lougoutuser(request):
+    logout(request)
+    return redirect('index')
 
 @login_required
 def banAuction(request, id):
@@ -59,8 +98,14 @@ def register(request):
     if request.method == 'POST':
         fm = UserCreationForm(request.POST)
         if fm.is_valid():
+            us = userInfo()
+            us.username = fm.cleaned_data['username']
+            us.language = fm.cleaned_data['language']
+            us.email = fm.cleaned_data['email']
+            us.save()
             fm.save()
             messages.success(request, 'Account created successfully')
+            return redirect('index')
     else:
         fm = UserCreationForm()
 
@@ -102,14 +147,24 @@ def change_email(request):
 
 @login_required
 def edit_auction(request, id):
+    print("lang" in request.COOKIES)
     currauction = auction.objects.get(pk=id)
+    if currauction.lockedby == "":
+        currauction.lockedby = request.COOKIES.get(settings.SESSION_COOKIE_NAME)
+        messages.success(request, "The page is locked")
+        currauction.save()
+    elif currauction.lockedby != request.COOKIES.get(settings.SESSION_COOKIE_NAME):
+        return render("locked.html", {'auction': currauction})
+
     if request.method == 'POST':
+
         form = editDescriptionForm(request.POST, request.user)
         if form.is_valid():
-
             currauction.description = form.cleaned_data['description']
+            messages.success(request, "Edit successful")
+            currauction.lockedby = ""
+            messages.success(request, "The lock is lifted")
             currauction.save()
-            messages.succes(request, "Edit successful")
             return redirect('index')
         else:
             messages.error(request, "Description was not accepted. Please try again")
@@ -122,11 +177,19 @@ def edit_auction(request, id):
 
 @login_required
 def place_bid(request, id):
-    # Add mutex? Semaphor
     currauction = auction.objects.get(pk=id)
     user = request.user
+
     if user == currauction.getWinner():
         messages.error(request, "You are already winning this auction.")
+
+    elif currauction.lockedby == "":
+        currauction.lockedby = request.COOKIES.get(settings.SESSION_COOKIE_NAME)
+        messages.success(request, "The page is locked")
+        currauction.save()
+    elif currauction.lockedby != request.COOKIES.get(settings.SESSION_COOKIE_NAME):
+        return render_to_response(request, "locked.html", {'auction': currauction})
+
     if request.method == 'POST':
         form = bidForm(request.POST, request.user)
         if form.is_valid():
@@ -139,6 +202,13 @@ def place_bid(request, id):
                 currauction.currentBid = temp
                 currauction.setWinner(user)
                 currauction.addBidder(user)
+
+                diff = currauction.deadline - timezone.timedelta(minutes=5)
+                if diff < timezone.now:
+                    currauction.deadline = currauction.deadline + timezone.timedelta(minutes=5)
+
+                currauction.lockedby = ""
+                messages.success(request, "The lock is lifted")
                 print(currauction.getBidders())
                 currauction.save()
                 currauction.notifySeller("newbid")
@@ -164,9 +234,13 @@ def create_auction(request):
             newAuction.description = form.cleaned_data['description']
             newAuction.minprice = form.cleaned_data['minprice']
             newAuction.deadline = form.cleaned_data['deadline']
-            if newAuction.checkDeadline(created=datetime.now(), deadline=form.cleaned_data['deadline']):
+            if newAuction.minprice < 0:
+                messages.error(request, "Minimum price can not be a negative number")
+
+            elif newAuction.checkDeadline(created=datetime.now(), deadline=form.cleaned_data['deadline']):
                 newAuction.save()
                 from_email = settings.EMAIL_HOST_USER
+                print(user.email)
                 to_email = [from_email, user.email]
                 send_mail(subject="New Auction posted", message="Your auction was succesfully posted",
                           from_email=from_email, recipient_list=to_email, fail_silently=False, )
@@ -174,7 +248,7 @@ def create_auction(request):
                 return redirect('index')
             else:
                 messages.error(request, "Auctions duration must be 27 hours")
-            return redirect('index')
+            return redirect('create_auction')
 
     else:
         form = auctionForm(request.POST, request.user)

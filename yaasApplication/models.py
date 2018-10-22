@@ -5,10 +5,34 @@ import datetime
 from django import forms
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import auth
+import django.contrib.auth.base_user as auth_base
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
+
 
 
 # Create your models here.
+
+class userInfo(models.Model):
+    username = models.CharField(max_length=40)
+    language = models.CharField(max_length=10)
+    email = models.CharField(max_length=50, default="")
+
+    @classmethod
+    def exists(cls, user):
+        return len(cls.objects.filter(username=user)) > 0
+
+    @classmethod
+    def getLang(cls, user):
+        return cls.objects.get(username=user).language
+
+    @classmethod
+    def getEmail(cls, user):
+        return cls.objects.get(username=user).email
+
+
 
 class auction(models.Model):
     title = models.CharField(max_length=30)
@@ -22,9 +46,18 @@ class auction(models.Model):
     winner = models.ForeignKey(User, default=None, on_delete=models.CASCADE, null=True)
     isBanned = models.BooleanField(auto_created=True, default=False)
     bidders = []
+    lockedby = models.TextField(default="")
+    timelock = 0
 
     def __str__(self):
         return self.title
+
+    def getTimeLock(self):
+        temp = self.timelock
+        return temp
+
+    def incrementTimeLock(self):
+        self.timelock += 1
 
     def addBidder(self, bidder):
         if bidder not in self.bidders:
@@ -73,7 +106,7 @@ class auction(models.Model):
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email]
             for p in self.bidders:
-                to_email.append(p)
+                to_email.append(userInfo.getEmail(p))
 
             send_mail(subject="Auction banned",
                       message="The admin has banned this auction: %s" % self.getTitle(),
@@ -84,7 +117,7 @@ class auction(models.Model):
             to_email = [from_email]
             for p in self.bidders:
                 if p != self.winner:
-                    to_email.append(p)
+                    to_email.append(userInfo.getEmail(p))
 
             send_mail(subject="Auction resolved",
                       message="The auction %s has been resolved" % self.getTitle(),
@@ -100,6 +133,7 @@ class auction(models.Model):
     def notifySeller(self, reason):
         if reason == "newbid":
             from_email = settings.EMAIL_HOST_USER
+            self.seller.email
             to_email = [from_email, self.seller.email]
             send_mail(subject="New bid on auction",
                       message="A new bid was placed on your auction: %s" % self.getTitle(),
@@ -122,14 +156,14 @@ class auction(models.Model):
     def notifyWinner(self, reason):
         if reason == "newbid":
             from_email = settings.EMAIL_HOST_USER
-            to_email = [from_email, self.winner.email]
+            to_email = [from_email, userInfo.getEmail(self.winner)]
             send_mail(subject="Bid received on auction", message="Your bid was successfully placed on auction: %s"
                                                                  % self.getTitle(),
                       from_email=from_email, recipient_list=to_email, fail_silently=False, )
 
         elif reason == "resolved":
             from_email = settings.EMAIL_HOST_USER
-            to_email = [from_email, self.winner.email]
+            to_email = [from_email, userInfo.getEmail(self.winner)]
             send_mail(subject="Auction resolved", message="Congratulations you have won the auction: %s"
                                                           % self.getTitle(),
                       from_email=from_email, recipient_list=to_email, fail_silently=False, )
