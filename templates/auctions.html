@@ -2,20 +2,67 @@
 
 {% block content %}
     {%  for auction in auctions %}
+         {% if auction.is_active %}
 
-        {% if auction.is_active %}
-            Title: {{ auction.title }} Sold by: {{auction.seller}} Created: {{ auction.created_at}} minimum price: {{ auction.minprice }} <br>
-            Description: {{ auction.description }}<br> Deadline {{ auction.deadline }} <br>
-            Current bid: {{ auction.currentBid }}
-            {% if user.is_authenticated %}
-                {% if user != auction.seller and auction.is_active %}<br>
-                    <a href={% url "place_bid" auction.id %}>New Bid</a>
-                 {% elif user == auction.seller %}
-                    <a href={% url 'edit_auction' auction.id %}> Edit </a>
-                    {% endif %}
-            {% endif %}
+             {% if lan == "de" %}
+                 Titel: {{ auction.title }}
+                 Verkäufer: {{auction.seller}}
+                 Datum: {{ auction.created_at}}
+                 Minimalgebot:: {{ auction.minprice }} <br>
+                 Beschreibung: {{ auction.description }}<br>
+                 Endet in/am {{ auction.deadline }} <br>
+                 Aktuelles Gebot: {{ auction.currentBid }}
+
+                 {% if user.is_authenticated %}
+                        {% if user != auction.seller and auction.is_active %}<br>
+                                 <a href={% url "place_bid" auction.id %}>Neues gebot</a>
+                        {% elif user == auction.seller %}
+                                 <a href={% url 'edit_auction' auction.id %}> Beschreibung ändern </a>
+                        {% endif %}
+                 {% endif %}
+
+
+
+
+             {% elif lan == "en" %}
+                 Title: {{ auction.title }}
+                 Sold by: {{auction.seller}}
+                 Created: {{ auction.created_at}}
+                 minimum price: {{ auction.minprice }} <br>
+                 Description: {{ auction.description }}<br>
+                 Deadline {{ auction.deadline }} <br>
+                 Current bid: {{ auction.currentBid }}
+
+                 {% if user.is_authenticated %}
+                        {% if user != auction.seller and auction.is_active %}<br>
+                            <a href={% url "place_bid" auction.id %}>New Bid</a>
+                        {% elif user == auction.seller %}
+                            <a href={% url 'edit_auction' auction.id %}> Edit </a>
+                        {% endif %}
+                 {% endif %}
+
+
+             {% elif lan == "sv" %}
+                 Titel: {{ auction.title }}
+                 Sälgare: {{auction.seller}}
+                 Datum: {{ auction.created_at}}
+                 Startpris: {{ auction.minprice }} <br>
+                 Deskription: {{ auction.description }}<br>
+                 Deadline {{ auction.deadline }} <br>
+                 Högsta bud: {{ auction.currentBid }}
+
+                 {% if user.is_authenticated %}
+                        {% if user != auction.seller and auction.is_active %}<br>
+                                <a href={% url "place_bid" auction.id %}>Lägg bud</a>
+                        {% elif user == auction.seller %}
+                                <a href={% url 'edit_auction' auction.id %}> Ändra </a>
+                        {% endif %}
+
+                 {% endif %}
+             {% endif %}
 
          {% endif %}
+
             {% if user.is_superuser and not auction.isBanned and auction.is_active %}
                 <br>
                 <a href={% url 'ban_auction' auction.id %}>Ban this auction</a>

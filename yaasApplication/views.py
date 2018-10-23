@@ -188,7 +188,8 @@ def place_bid(request, id):
         messages.success(request, "The page is locked")
         currauction.save()
     elif currauction.lockedby != request.COOKIES.get(settings.SESSION_COOKIE_NAME):
-        return render_to_response(request, "locked.html", {'auction': currauction})
+        #return render_to_response(request, "locked.html", {'auction': currauction})
+        return redirect('index')
 
     if request.method == 'POST':
         form = bidForm(request.POST, request.user)
@@ -203,8 +204,11 @@ def place_bid(request, id):
                 currauction.setWinner(user)
                 currauction.addBidder(user)
 
+                #if diff < datetime.now:
                 diff = currauction.deadline - timezone.timedelta(minutes=5)
-                if diff < timezone.now:
+                now = datetime.now()
+                if currauction.checkDeadline(created=currauction.created_at, deadline=currauction.deadline,
+                                             reason="minutes"):
                     currauction.deadline = currauction.deadline + timezone.timedelta(minutes=5)
 
                 currauction.lockedby = ""
@@ -237,7 +241,7 @@ def create_auction(request):
             if newAuction.minprice < 0:
                 messages.error(request, "Minimum price can not be a negative number")
 
-            elif newAuction.checkDeadline(created=datetime.now(), deadline=form.cleaned_data['deadline']):
+            elif newAuction.checkDeadline(created=datetime.now(), deadline=form.cleaned_data['deadline'], reason="days"):
                 newAuction.save()
                 from_email = settings.EMAIL_HOST_USER
                 print(user.email)

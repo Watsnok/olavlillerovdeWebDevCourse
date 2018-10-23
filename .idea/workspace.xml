@@ -15,25 +15,28 @@
     <session id="-1466317497">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="2" />
           <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.82" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="8370" />
-          <entry key="py" value="24491" />
+          <entry key="html" value="8648" />
+          <entry key="py" value="27333" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="8370" />
-          <entry key="Python" value="24490" />
+          <entry key="HTML" value="8648" />
+          <entry key="Python" value="27332" />
           <entry key="RegExp" value="1" />
         </counts>
       </usages-collector>
@@ -42,16 +45,16 @@
           <entry key="dt00bt67-server-side-web-services-project-2018-Watsnok" value="1" />
           <entry key="gitattributes" value="1" />
           <entry key="hmtl" value="1" />
-          <entry key="html" value="86" />
-          <entry key="py" value="143" />
+          <entry key="html" value="88" />
+          <entry key="py" value="149" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="86" />
+          <entry key="HTML" value="88" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="143" />
+          <entry key="Python" value="149" />
           <entry key="UNKNOWN" value="1" />
         </counts>
       </usages-collector>
@@ -61,100 +64,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yaasApplication/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="209" column="41" lean-forward="true" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
+            <state relative-caret-position="2430">
+              <caret line="191" column="19" lean-forward="true" selection-start-line="191" selection-end-line="192" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1540232787571" expanded="true" signature="1219:1223" ph="..." />
+                <marker date="1540299292000" expanded="true" signature="1219:1223" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/olavlillerovdeWebDevCourse/settings.py">
+        <entry file="file://$PROJECT_DIR$/templates/auctions.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="146" column="24" lean-forward="true" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
-              <folding>
-                <element signature="e#326#382#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="272">
+              <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/query.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/olavlillerovdeWebDevCourse/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="398" selection-start-line="398" selection-end-line="398" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/manager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yaasApplication/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="119" column="28" lean-forward="true" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <marker date="1540230955105" expanded="true" signature="493:950" ph="..." />
-                <marker date="1540230955105" expanded="true" signature="688:752" ph="..." />
-                <marker date="1540230955105" expanded="true" signature="1697:1746" ph="..." />
-                <marker date="1540230955105" expanded="true" signature="1857:1890" ph="..." />
-                <marker date="1540230955105" expanded="true" signature="2024:2058" ph="..." />
-                <marker date="1540230955105" expanded="true" signature="4206:4431" ph="..." />
-                <marker date="1540230955105" expanded="true" signature="4462:4471" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/createAuction.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/home.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+            <state relative-caret-position="493">
+              <caret line="38" column="4" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -179,6 +115,7 @@
       <find>user.emai</find>
       <find>session</find>
       <find>request.</find>
+      <find>checkDeadline</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -211,7 +148,6 @@
         <option value="$PROJECT_DIR$/olavlillerovdeWebDevCourse/celery.py" />
         <option value="$PROJECT_DIR$/yaasApplication/admin.py" />
         <option value="$PROJECT_DIR$/templates/place_bid.html" />
-        <option value="$PROJECT_DIR$/templates/auctions.html" />
         <option value="$PROJECT_DIR$/templates/locked.html" />
         <option value="$PROJECT_DIR$/yaasApplication/tasks.py" />
         <option value="$PROJECT_DIR$/templates/registration/login.html" />
@@ -219,9 +155,11 @@
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/yaasApplication/forms.py" />
         <option value="$PROJECT_DIR$/templates/home.html" />
-        <option value="$PROJECT_DIR$/yaasApplication/models.py" />
         <option value="$PROJECT_DIR$/olavlillerovdeWebDevCourse/settings.py" />
+        <option value="$PROJECT_DIR$/yaasApplication/tests.py" />
+        <option value="$PROJECT_DIR$/yaasApplication/models.py" />
         <option value="$PROJECT_DIR$/yaasApplication/views.py" />
+        <option value="$PROJECT_DIR$/templates/auctions.html" />
       </list>
     </option>
   </component>
@@ -231,11 +169,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="816" />
-    <option name="height" value="576" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -243,7 +180,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -259,6 +195,11 @@
             <path>
               <item name="olavlillerovdeWebDevCourse" type="b2602c69:ProjectViewProjectNode" />
               <item name="olavlillerovdeWebDevCourse" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="olavlillerovdeWebDevCourse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="olavlillerovdeWebDevCourse" type="462c0819:PsiDirectoryNode" />
               <item name="yaasApplication" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -269,11 +210,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/GitHub/PythonAnywhere" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -347,9 +290,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11567164" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.123667374" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -362,8 +305,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010661" side_tool="true" weight="0.38828632" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4989339" visible="true" weight="0.30368763" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.30368763" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49840087" visible="true" weight="0.30477223" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -381,7 +324,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/yaasApplication/celery.py" />
     <entry file="file://$PROJECT_DIR$/celery.py" />
     <entry file="file://$PROJECT_DIR$/yaasApplication/admin.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -394,9 +336,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="25" lean-forward="true" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -463,16 +402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/auctions.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="79" lean-forward="true" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
         </state>
       </provider>
     </entry>
@@ -483,17 +412,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaasApplication/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/yaasApplication/tasks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-            <marker date="1540060499314" expanded="true" signature="422:427" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -578,12 +500,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/olavlillerovdeWebDevCourse/urls.py">
+    <entry file="file://$PROJECT_DIR$/yaasApplication/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="34" column="41" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="41" />
+        <state relative-caret-position="136">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaasApplication/email-messages.txt" />
+    <entry file="file://$PROJECT_DIR$/olavlillerovdeWebDevCourse/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2414">
+          <caret line="146" column="24" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
           <folding>
-            <element signature="e#650#682#0" expanded="true" />
+            <element signature="e#326#382#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -591,7 +521,7 @@
     <entry file="file://$PROJECT_DIR$/templates/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -605,36 +535,20 @@
     <entry file="file://$PROJECT_DIR$/templates/createAuction.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home.html">
+    <entry file="file://$PROJECT_DIR$/yaasApplication/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaasApplication/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        <state relative-caret-position="282">
+          <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <marker date="1540224191873" expanded="true" signature="518:524" ph="..." />
-            <marker date="1540224191873" expanded="true" signature="901:906" ph="..." />
-            <marker date="1540224191873" expanded="true" signature="1039:1043" ph="..." />
-            <marker date="1540224191873" expanded="true" signature="1238:1390" ph="..." />
-            <marker date="1540224191873" expanded="true" signature="1456:1490" ph="..." />
+            <element signature="e#0#40#0" expanded="true" />
+            <marker date="1540239341809" expanded="true" signature="302:307" ph="..." />
+            <marker date="1540239341809" expanded="true" signature="335:881" ph="..." />
+            <marker date="1540239341809" expanded="true" signature="902:939" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/query.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="398" selection-start-line="398" selection-end-line="398" />
         </state>
       </provider>
     </entry>
@@ -645,44 +559,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaasApplication/email-messages.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/olavlillerovdeWebDevCourse/settings.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/query.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="146" column="24" lean-forward="true" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
-          <folding>
-            <element signature="e#326#382#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="205">
+          <caret line="398" selection-start-line="398" selection-end-line="398" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaasApplication/models.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/template/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="119" column="28" lean-forward="true" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <marker date="1540230955105" expanded="true" signature="493:950" ph="..." />
-            <marker date="1540230955105" expanded="true" signature="688:752" ph="..." />
-            <marker date="1540230955105" expanded="true" signature="1697:1746" ph="..." />
-            <marker date="1540230955105" expanded="true" signature="1857:1890" ph="..." />
-            <marker date="1540230955105" expanded="true" signature="2024:2058" ph="..." />
-            <marker date="1540230955105" expanded="true" signature="4206:4431" ph="..." />
-            <marker date="1540230955105" expanded="true" signature="4462:4471" ph="..." />
-          </folding>
+        <state relative-caret-position="205">
+          <caret line="527" selection-start-line="527" selection-end-line="527" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yaasApplication/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="209" column="41" lean-forward="true" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
+        <state relative-caret-position="2430">
+          <caret line="191" column="19" lean-forward="true" selection-start-line="191" selection-end-line="192" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <marker date="1540232787571" expanded="true" signature="1219:1223" ph="..." />
+            <marker date="1540299292000" expanded="true" signature="1219:1223" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/auctions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaasApplication/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="32" column="8" lean-forward="true" selection-start-line="32" selection-start-column="8" selection-end-line="35" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1540298377592" expanded="true" signature="493:1045" ph="..." />
+            <marker date="1540298377592" expanded="true" signature="688:752" ph="..." />
+            <marker date="1540298377592" expanded="true" signature="1792:1841" ph="..." />
+            <marker date="1540298377592" expanded="true" signature="1952:1985" ph="..." />
+            <marker date="1540298377592" expanded="true" signature="2119:2153" ph="..." />
+            <marker date="1540298377592" expanded="true" signature="4990:5215" ph="..." />
+            <marker date="1540298377592" expanded="true" signature="5246:5255" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/olavlillerovdeWebDevCourse/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="38" column="4" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="63" />
         </state>
       </provider>
     </entry>

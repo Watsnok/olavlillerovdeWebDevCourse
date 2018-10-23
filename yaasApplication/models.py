@@ -30,7 +30,10 @@ class userInfo(models.Model):
 
     @classmethod
     def getEmail(cls, user):
-        return cls.objects.get(username=user).email
+        if user.is_superuser:
+            return "olav.lillerovde@gmail.com"
+        else:
+            return cls.objects.get(username=user).email
 
 
 
@@ -66,16 +69,29 @@ class auction(models.Model):
     def getBidders(self):
         return self.bidders
 
-    def checkDeadline(self, created, deadline):
-        duration = datetime.timedelta(days=3)
-        diff = deadline - duration
-        if (diff.year < created.year) or (diff.year == created.year and diff.month == created.month
+    def checkDeadline(self, created, deadline, reason):
+        if reason == "days":
+            duration = datetime.timedelta(days=3)
+            diff = deadline - duration
+            if (diff.year < created.year) or (diff.year == created.year and diff.month == created.month
                                           and diff.day <= created.day) or (diff.year == created.year
                                                                            and diff.month < created.month):
             # raise forms.ValidationError("Duration must be longer than 72 hours")
-            return False
-        else:
-            return True
+                return False
+            else:
+                return True
+
+        elif reason == "minutes":
+            duration = datetime.timedelta(minutes=5)
+            diff = deadline - duration
+            now = datetime.datetime.now()
+            if (diff.year < now.year) or (diff.year == now.year and diff.month == now.month
+                                              and diff.day <= now.day) or (diff.year == now.year
+                                                                               and diff.month < now.month):
+                # raise forms.ValidationError("Duration must be longer than 72 hours")
+                return True
+            else:
+                return False
 
     def banAuction(self):
         # Notify all bidders
